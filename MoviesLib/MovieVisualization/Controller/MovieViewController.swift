@@ -47,10 +47,13 @@ class MovieViewController: UIViewController {
             labelTitle.text = movie.title
             labelRating.text = movie.ratingFormatted
             labelSummary.text = movie.summary
-//            labelCategories.text = movie.categories
             labelDuration.text = movie.duration
             if let image = movie.image {
                 imageViewPoster.image = UIImage(data: image)
+            }
+            
+            if let categories = movie.categories as? Set<Category> {
+                labelCategories.text = categories.compactMap({$0.name}).sorted().joined(separator: " | ")
             }
         }
     }

@@ -18,10 +18,25 @@ class MovieFormViewController: UIViewController {
     @IBOutlet weak var buttonSave: UIButton!
     
     var movie: Movie?
+    var selectedCategories: Set<Category> = [] {
+        didSet {
+            if selectedCategories.isEmpty {
+                labelCategories.text = "Adicionar categorias"
+            } else {
+                labelCategories.text = selectedCategories.compactMap({$0.name}).sorted().joined(separator: " | ")
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let categoriesViewController = segue.destination as? CategoriesTableViewController
+        categoriesViewController?.selectedCategories = selectedCategories
+        categoriesViewController?.delegate = self
     }
     
     private func setupUI() {
@@ -35,6 +50,9 @@ class MovieFormViewController: UIViewController {
 //            labelCategories.text = ""
             if let image = movie.image {
                 imageViewPoster.image = UIImage(data: image)
+            }
+            if let categories = movie.categories as? Set<Category>, !categories.isEmpty{
+                selectedCategories = categories
             }
         }
     }
@@ -85,7 +103,7 @@ class MovieFormViewController: UIViewController {
         movie?.duration = textFieldDuration.text
         movie?.rating = Double(textFieldRating.text!) ?? 0
         movie?.image = imageViewPoster.image?.jpegData(compressionQuality: 0.8)
-//        movie?.categories = ?
+        movie?.categories = selectedCategories as NSSet
         
         do {
             try context.save()
@@ -105,5 +123,11 @@ extension MovieFormViewController: UIImagePickerControllerDelegate & UINavigatio
         }
         
         dismiss(animated: true)
+    }
+}
+
+extension MovieFormViewController: CategoriesDelegate {
+    func setSelectedCategories(_ categories: Set<Category>) {
+        selectedCategories = categories
     }
 }
