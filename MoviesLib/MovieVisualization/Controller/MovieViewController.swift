@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVKit
 
 class MovieViewController: UIViewController {
     
@@ -19,6 +20,10 @@ class MovieViewController: UIViewController {
     
     // MARK: - Properties
     var movie: Movie?
+    var trailer: String = ""
+    private lazy var moviePlayerController = AVPlayerViewController()
+    private var player: AVPlayer?
+    
     
     // MARK: - Super Methods
     override func viewDidLoad() {
@@ -27,6 +32,7 @@ class MovieViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        trailer = ""
         setupUI()
     }
     
@@ -38,6 +44,15 @@ class MovieViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction func play(_ sender: UIButton) {
+        if trailer.isEmpty != true {
+            present(moviePlayerController, animated: true) {
+                self.player?.play()
+            }
+        }
+//        else {
+//            let alert = UIAlertController(title: "Atençao", message: "Filme não encontrado!", preferredStyle: .alert, )
+//            present(alert, animated: true)
+//        }
     }
     
     // MARK: - Methods
@@ -55,6 +70,31 @@ class MovieViewController: UIViewController {
             if let categories = movie.categories as? Set<Category> {
                 labelCategories.text = categories.compactMap({$0.name}).sorted().joined(separator: " | ")
             }
+            if let title = movie.title {
+                loadTrailer(with: title)
+            }
+        }
+    }
+    
+    private func loadTrailer(with title: String) {
+            let itunesPath = "https://itunes.apple.com/search?media=movie&entity=movie&term="
+            
+            guard let encodedTitle = title.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
+                  let url = URL(string: "\(itunesPath)\(encodedTitle)") else {return}
+            
+            URLSession.shared.dataTask(with: url) { (data, _, _) in
+                guard let data = data else {return}
+                let apiResult = try! JSONDecoder().decode(ItunesResult.self, from: data)
+                self.trailer = apiResult.results.first?.previewUrl ?? ""
+                self.prepareVideo()
+            }.resume()
+        }
+    
+    private func prepareVideo() {
+        guard let url = URL(string: trailer) else {return}
+        player = AVPlayer(url: url)
+        DispatchQueue.main.async {
+            self.moviePlayerController.player = self.player
         }
     }
 }

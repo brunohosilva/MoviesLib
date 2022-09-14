@@ -22,6 +22,9 @@
 		B67A833428BEC40C000C2BBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B67A833328BEC40C000C2BBB /* Assets.xcassets */; };
 		B67A833728BEC40C000C2BBB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B67A833528BEC40C000C2BBB /* LaunchScreen.storyboard */; };
 		B69C14BE28D1483A006FD98B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69C14BD28D1483A006FD98B /* MapViewController.swift */; };
+		B69C14C128D1605A006FD98B /* ItunesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69C14C028D1605A006FD98B /* ItunesResult.swift */; };
+		B69C14C528D1676D006FD98B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69C14C428D1676D006FD98B /* SettingsViewController.swift */; };
+		B69C14C728D16BA0006FD98B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B69C14C628D16BA0006FD98B /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +45,9 @@
 		B67A833628BEC40C000C2BBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B67A833828BEC40C000C2BBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B69C14BD28D1483A006FD98B /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		B69C14C028D1605A006FD98B /* ItunesResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItunesResult.swift; sourceTree = "<group>"; };
+		B69C14C428D1676D006FD98B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		B69C14C628D16BA0006FD98B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +66,7 @@
 			children = (
 				B6296D6E28C2B8E2005901DB /* movies.json */,
 				B6384D7D28CAAD4E0012CE66 /* MoviesLib.xcdatamodeld */,
+				B69C14C628D16BA0006FD98B /* Settings.bundle */,
 			);
 			path = Files;
 			sourceTree = "<group>";
@@ -67,6 +74,7 @@
 		B6296D7128C2B986005901DB /* MovieVisualization */ = {
 			isa = PBXGroup;
 			children = (
+				B69C14BF28D1603C006FD98B /* Model */,
 				B6296D7228C2B9A5005901DB /* Controller */,
 			);
 			path = MovieVisualization;
@@ -181,6 +189,7 @@
 		B67A832928BEC406000C2BBB /* MoviesLib */ = {
 			isa = PBXGroup;
 			children = (
+				B69C14C228D1674D006FD98B /* Settings */,
 				B69C14BB28D14803006FD98B /* Map */,
 				B67A832A28BEC406000C2BBB /* AppDelegate.swift */,
 				B67A832C28BEC406000C2BBB /* SceneDelegate.swift */,
@@ -210,6 +219,30 @@
 			isa = PBXGroup;
 			children = (
 				B69C14BD28D1483A006FD98B /* MapViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B69C14BF28D1603C006FD98B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B69C14C028D1605A006FD98B /* ItunesResult.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B69C14C228D1674D006FD98B /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				B69C14C328D16755006FD98B /* Controller */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		B69C14C328D16755006FD98B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B69C14C428D1676D006FD98B /* SettingsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -274,6 +307,7 @@
 			files = (
 				B67A833728BEC40C000C2BBB /* LaunchScreen.storyboard in Resources */,
 				B67A833428BEC40C000C2BBB /* Assets.xcassets in Resources */,
+				B69C14C728D16BA0006FD98B /* Settings.bundle in Resources */,
 				B6296D6F28C2B8E2005901DB /* movies.json in Resources */,
 				B67A833228BEC406000C2BBB /* Main.storyboard in Resources */,
 			);
@@ -294,7 +328,9 @@
 				B6384D7A28CAAA130012CE66 /* MovieFormViewController.swift in Sources */,
 				B6296D8128C2E6AB005901DB /* Movie+Various.swift in Sources */,
 				B6384D8128CABA3B0012CE66 /* ViewController+Context.swift in Sources */,
+				B69C14C128D1605A006FD98B /* ItunesResult.swift in Sources */,
 				B6296D7B28C2C72A005901DB /* MoviesTableViewController.swift in Sources */,
+				B69C14C528D1676D006FD98B /* SettingsViewController.swift in Sources */,
 				B6384D7F28CAAD4E0012CE66 /* MoviesLib.xcdatamodeld in Sources */,
 				B67A832D28BEC406000C2BBB /* SceneDelegate.swift in Sources */,
 			);
